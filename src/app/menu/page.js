@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/components/CartProvider';
+import { DishSkeleton } from '@/components/LoadingSkeleton';
 
 function MenuContent() {
   const searchParams = useSearchParams();
@@ -28,16 +29,14 @@ function MenuContent() {
         ]);
         const itemsData = await itemsRes.json();
         const catsData = await catsRes.json();
-        
         setItems(itemsData.data || []);
         setCats(catsData.data || []);
-        
         if (categoryFromUrl) {
           const cat = catsData.data?.find(c => c.slug === categoryFromUrl);
           if (cat) setActiveCategory(categoryFromUrl);
         }
       } catch (error) {
-        console.error('Error fetching menu data:', error);
+        console.error(error);
       } finally {
         setLoading(false);
       }
@@ -83,15 +82,18 @@ function MenuContent() {
         <input type="text" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full max-w-md mx-auto block bg-[#1a1a1a] border border-gray-800 rounded-full px-5 py-3 text-white" />
       </div>
 
-      <div className="flex gap-2 overflow-x-auto mb-8 pb-2 scrollbar-none">
-        <button onClick={() => handleCategoryClick('all')} className={`px-4 py-2 rounded-full whitespace-nowrap ${activeCategory === 'all' ? 'bg-[#d8a43f] text-black' : 'bg-[#1a1a1a] text-gray-400'}`}>All</button>
+      {/* Category filters – fully visible on large screens, scrollable on mobile */}
+      <div className="flex flex-wrap gap-2 mb-8 pb-2 justify-center">
+        <button onClick={() => handleCategoryClick('all')} className={`px-4 py-2 rounded-full whitespace-nowrap ${activeCategory === 'all' ? 'bg-[#d8a43f] text-black' : 'bg-[#1a1a1a] text-gray-400 hover:bg-[#2a2a2a]'}`}>All</button>
         {cats.map(cat => (
-          <button key={cat._id} onClick={() => handleCategoryClick(cat.slug)} className={`px-4 py-2 rounded-full whitespace-nowrap ${activeCategory === cat.slug ? 'bg-[#d8a43f] text-black' : 'bg-[#1a1a1a] text-gray-400'}`}>{cat.name}</button>
+          <button key={cat._id} onClick={() => handleCategoryClick(cat.slug)} className={`px-4 py-2 rounded-full whitespace-nowrap ${activeCategory === cat.slug ? 'bg-[#d8a43f] text-black' : 'bg-[#1a1a1a] text-gray-400 hover:bg-[#2a2a2a]'}`}>{cat.name}</button>
         ))}
       </div>
 
       {loading ? (
-        <div className="flex justify-center py-20"><div className="w-12 h-12 border-4 border-[#cc2b2b] border-t-white rounded-full animate-spin"></div></div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {Array(8).fill().map((_, i) => <DishSkeleton key={i} />)}
+        </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {filteredItems.map(item => (
