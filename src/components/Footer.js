@@ -5,7 +5,7 @@ import { useState } from 'react';
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState(null);
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '923000000000';
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
 
   const handleNewsletter = (e) => {
     e.preventDefault();
@@ -135,14 +135,14 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-500 text-xs text-center md:text-left">© {currentYear} Texas Grill Kohat. All rights reserved.</p>
             <div className="flex gap-6">
-              <Link href="/privacy" className="text-gray-500 hover:text-[#d8a43f] text-xs transition">Privacy Policy</Link>
-              <Link href="/terms" className="text-gray-500 hover:text-[#d8a43f] text-xs transition">Terms of Service</Link>
+              <Link href="#" className="text-gray-500 hover:text-[#d8a43f] text-xs transition">Privacy Policy</Link>
+              <Link href="#" className="text-gray-500 hover:text-[#d8a43f] text-xs transition">Terms of Service</Link>
             </div>
           </div>
         </div>
 
         <div className="text-center mt-6">
-          <p className="text-gray-600 text-[10px]">Crafted with 🔥 in Kohat, Pakistan</p>
+          <p className="text-gray-600 text-[10px]">Crafted with ❤️ br <a href='https://github.com/rafideveloper7/' target='_blank'>Rafi Ullah</a></p>
         </div>
       </div>
     </footer>

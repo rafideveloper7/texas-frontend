@@ -20,7 +20,7 @@ export function Navbar() {
               <Link href="/">
                 <div className="flex items-center cursor-pointer">
                   <div className="w-10 h-10 mr-3 hidden sm:block">
-                    <img src="./IMGs/logo.PNG" alt="Logo" className="w-full h-full object-cover rounded-full border border-[#d8a43f]" />
+                    <IKImage src="./IMGs/logo.PNG" alt="Logo" className="w-full h-full object-cover rounded-full border border-[#d8a43f]" />
                   </div>
                   <div className="font-extrabold tracking-tight hover:opacity-80 transition text-xl md:text-2xl">
                     <span className="text-white">TEXAS </span>
