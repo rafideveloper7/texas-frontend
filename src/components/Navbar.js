@@ -5,25 +5,24 @@ import { usePathname } from 'next/navigation';
 import { useCart } from './CartProvider';
 import { useState } from 'react';
 import SidebarMenu from './SidebarMenu';
-// import Image from 'next/image';
 
 export function Navbar() {
   const { numItems } = useCart();
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const logoUrl = process.env.NEXT_PUBLIC_LOGO_URL;
 
   return (
     <>
       <nav className="fixed w-full z-50 bg-[#121212]/95 backdrop-blur-xl border-b border-gray-800 transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
               <Link href="/">
                 <div className="flex items-center cursor-pointer">
                   <div className="w-10 h-10 mr-3 hidden sm:block">
                     <img 
-                      src="https://ik.imagekit.io/o7uoqfzynm/IMGs/logo.png" 
+                      src={logoUrl} 
                       alt="Logo" 
                       className="w-full h-full object-cover rounded-full border border-[#d8a43f]" 
                     />
@@ -36,7 +35,6 @@ export function Navbar() {
               </Link>
             </div>
             
-            {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-6">
               <Link href="/" className={`font-bold transition duration-300 tracking-wider text-[13px] uppercase ${pathname === '/' ? 'text-[#d8a43f]' : 'text-gray-300 hover:text-[#d8a43f]'}`}>Home</Link>
               <Link href="/about" className={`font-bold transition duration-300 tracking-wider text-[13px] uppercase ${pathname === '/about' ? 'text-[#d8a43f]' : 'text-gray-300 hover:text-[#d8a43f]'}`}>About</Link>
@@ -49,7 +47,6 @@ export function Navbar() {
               <Link href="/contact" className={`font-bold transition duration-300 tracking-wider text-[13px] uppercase ${pathname === '/contact' ? 'text-[#d8a43f]' : 'text-gray-300 hover:text-[#d8a43f]'}`}>Contact</Link>
             </div>
 
-            {/* Actions */}
             <div className="flex items-center space-x-3 sm:space-x-4">
               <Link href="/checkout" className="relative min-w-[44px] min-h-[44px] flex items-center justify-center text-white hover:text-[#d8a43f] transition">
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
