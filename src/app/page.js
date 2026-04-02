@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/components/CartProvider";
 // import IKImage from "@/components/IKImage";
 import { CategorySkeleton, DishSkeleton } from "@/components/LoadingSkeleton";
-import { IKImage } from "@imagekit/next";
+import { IKImage } from '@imagekit/next';
 
 export default function HomePage() {
   const router = useRouter();
@@ -20,10 +20,10 @@ export default function HomePage() {
   const [error, setError] = useState(null);
 
   const heroImages = [
-    "/galleries/hero_desktop_1774507841290.png",
-    "/galleries/bbq_items.jpg",
-    "/galleries/karahi.jpg",
-    "/galleries/restaurant_exterior_1774507931384.png",
+    "https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-2.jpg",
+    "https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-3.jpg",
+    "https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-1.jpg",
+    "https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-4.jpg",
   ];
 
   useEffect(() => {
@@ -160,19 +160,19 @@ export default function HomePage() {
                     <div className="absolute inset-0 rounded-3xl border-2 border-[#d8a43f]/30 pointer-events-none"></div>
                     <div className="grid grid-cols-3 grid-rows-3 gap-3 h-[500px] w-full">
                       <div className="col-span-2 row-span-2 rounded-2xl overflow-hidden relative">
-                        <IKImage src="/galleries/bbq_items.jpg" alt="BBQ" width={600} height={400} className="w-full h-full object-cover" priority />
+                        <IKImage src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-6.jpg" alt="BBQ" width={600} height={400} className="w-full h-full object-cover" priority />
                       </div>
                       <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden">
-                        <IKImage src="/galleries/crunchy_zinger_burger_1774507949571.png" alt="Burger" width={200} height={200} className="w-full h-full object-cover" />
+                        <IKImage src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-9.jpg" alt="Burger" width={200} height={200} className="w-full h-full object-cover" />
                       </div>
                       <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden">
-                        <IKImage src="/galleries/karahi.jpg" alt="Karahi" width={200} height={200} className="w-full h-full object-cover" />
+                        <IKImage src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-4.jpg" alt="Karahi" width={200} height={200} className="w-full h-full object-cover" />
                       </div>
                       <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden">
-                        <IKImage src="/galleries/rice_biryani.jpg" alt="Biryani" width={200} height={200} className="w-full h-full object-cover" />
+                        <IKImage src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-4.jpg" alt="Biryani" width={200} height={200} className="w-full h-full object-cover" />
                       </div>
                       <div className="col-span-2 row-span-1 rounded-2xl overflow-hidden">
-                        <IKImage src="/galleries/pizza.jpg" alt="Pizza" width={400} height={200} className="w-full h-full object-cover" />
+                        <IKImage src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-8.jpg" alt="Pizza" width={400} height={200} className="w-full h-full object-cover" />
                       </div>
                     </div>
                     <div className="absolute -top-4 -right-4 bg-gradient-to-r from-[#d8a43f] to-[#cc2b2b] text-black px-4 py-2 rounded-full shadow-2xl"><div className="flex items-center gap-2"><span className="text-lg">⭐</span><span className="font-bold text-sm">20+ Signature Dishes</span></div></div>
@@ -272,7 +272,7 @@ export default function HomePage() {
               </div>
               <Link href="/about"><button className="text-[#d8a43f] font-semibold flex items-center gap-2 hover:gap-3 transition-all">Learn More About Us<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></button></Link>
             </div>
-            <div className="relative"><div className="relative rounded-xl overflow-hidden shadow-2xl"><IKImage src="/galleries/restaurant_exterior_1774507931384.png" alt="Texas Grill" width={800} height={600} className="w-full h-auto object-cover" priority /></div></div>
+            <div className="relative"><div className="relative rounded-xl overflow-hidden shadow-2xl"><IKImage src="https://ik.imagekit.io/o7uoqfzynm/IMGs/logo.png" alt="Texas Grill" width={800} height={600} className="w-full h-auto object-cover" priority /></div></div>
           </div>
         </div>
       </section>

@@ -7,7 +7,6 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
-  // Load cart from localStorage on mount
   useEffect(() => {
     const savedCart = localStorage.getItem('texas_cart');
     if (savedCart) {
@@ -20,7 +19,6 @@ export function CartProvider({ children }) {
     setLoaded(true);
   }, []);
 
-  // Save cart to localStorage whenever it changes
   useEffect(() => {
     if (loaded) {
       localStorage.setItem('texas_cart', JSON.stringify(cart));

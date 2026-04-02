@@ -4,8 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/components/CartProvider';
-import IKImage from '@/components/IKImage';
-import IKImage from '@/components/IKImage';
+import { IKImage } from '@imagekit/next';
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -130,7 +129,7 @@ export default function ProductDetailPage() {
                 width={800}
                 height={600}
                 className="w-full h-auto object-cover"
-                priority
+                loading="eager"
               />
               {product.price > 2000 && <span className="absolute top-4 left-4 bg-[#d8a43f] text-black text-xs font-black px-3 py-1 rounded-full">🔥 Chef's Special</span>}
             </div>

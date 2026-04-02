@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useAnimation } from 'framer-motion';
 import Link from 'next/link';
+import { IKImage } from '@imagekit/next';
 
 export default function ContactPage() {
   const [isMapLoaded, setIsMapLoaded] = useState(false);

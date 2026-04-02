@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useAnimation } from 'framer-motion';
+import { IKImage } from '@imagekit/next';
 
 export default function AboutPage() {
   const [aboutData, setAboutData] = useState(null);
@@ -15,7 +16,7 @@ export default function AboutPage() {
       try {
         // Since there's no specific about endpoint, we'll use categories and menu data to derive info
         // Or we can create a separate about endpoint later. For now, we'll hardcode the about text.
-        // But to keep dynamic, we can fetch from backend if you add an about route.
+        // But to keep dynamic, we can fetch from backend if we add an about route.
         setAboutData({
           text: "Born in the vibrant streets of Kohat, Texas Grill serves as a beacon of culinary authenticity, blending traditional Pakistani recipes with premium Texas-style grilling techniques.",
           address: "Village Togh Bala, Kohat, Pakistan",
@@ -104,7 +105,7 @@ export default function AboutPage() {
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center mb-20 md:mb-32">
           <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="w-full lg:w-1/2 relative group">
             <div className="aspect-[4/3] relative rounded-2xl md:rounded-3xl overflow-hidden border border-gray-800 shadow-2xl">
-              <img src="./IMGs/owner.jpg" alt="Texas Grill Restaurant" className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+              <IKImage src="https://ik.imagekit.io/o7uoqfzynm/IMGs/owner.jpg" alt="Texas Grill Restaurant" className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent"><p className="text-sm text-gray-300">Est. 2010 • Kohat, Pakistan</p></div>
             </div>

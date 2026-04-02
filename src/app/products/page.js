@@ -3,8 +3,7 @@ import { Suspense, useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useCart } from '@/components/CartProvider';
-// import IKImage from '@/components/IKImage';
-import { IKImage } from "@imagekit/next";
+import { IKImage } from '@imagekit/next';
 
 const PLACEHOLDER_IMAGE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%231a1a1a'/%3E%3Ctext x='100' y='110' text-anchor='middle' font-size='40' fill='%23666' font-family='Arial'%3E🍽️%3C/text%3E%3Ctext x='100' y='140' text-anchor='middle' font-size='14' fill='%23555'%3ENo image%3C/text%3E%3C/svg%3E";
 
