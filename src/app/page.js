@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/components/CartProvider";
 // import IKImage from "@/components/IKImage";
 import { CategorySkeleton, DishSkeleton } from "@/components/LoadingSkeleton";
-import { IKImage } from '@imagekit/next';
+import { IKImage } from "@imagekit/next";
 
 export default function HomePage() {
   const router = useRouter();
@@ -34,7 +34,7 @@ export default function HomePage() {
         const baseUrl = process.env.NEXT_PUBLIC_API_URL;
         const [itemsRes, catsRes] = await Promise.all([
           fetch(`${baseUrl}/menu`),
-          fetch(`${baseUrl}/categories`)
+          fetch(`${baseUrl}/categories`),
         ]);
         if (!itemsRes.ok || !catsRes.ok) throw new Error("Failed to fetch");
         const itemsData = await itemsRes.json();
@@ -84,7 +84,12 @@ export default function HomePage() {
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center text-white">
           <p className="text-red-500 mb-4">{error}</p>
-          <button onClick={() => window.location.reload()} className="bg-primary px-4 py-2 rounded">Retry</button>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-primary px-4 py-2 rounded"
+          >
+            Retry
+          </button>
         </div>
       </div>
     );
@@ -100,7 +105,19 @@ export default function HomePage() {
             exit={{ opacity: 0, y: 50, x: "-50%" }}
             className="fixed bottom-24 left-1/2 transform -translate-x-1/2 z-50 bg-[#d8a43f] text-black px-6 py-3 rounded-full shadow-2xl flex items-center gap-2 font-semibold"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 13l4 4L19 7"
+              ></path>
+            </svg>
             {toastMessage}
           </motion.div>
         )}
@@ -108,111 +125,368 @@ export default function HomePage() {
 
       {/* Hero Section – background images stay as CSS background, collage uses IKImage */}
       <section className="relative min-h-screen w-full overflow-hidden">
+        {/* Background Image with better positioning */}
         <div className="absolute inset-0 w-full h-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.2 }}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
               className="absolute inset-0 w-full h-full"
             >
+              {/* Image with better object positioning */}
               <div
                 className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${heroImages[currentSlide]})`, backgroundPosition: "center center" }}
+                style={{
+                  backgroundImage: `url(${heroImages[currentSlide]})`,
+                  backgroundPosition: "center 30%",
+                  backgroundSize: "cover",
+                }}
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/40" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+              {/* Better gradient overlays */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
             </motion.div>
           </AnimatePresence>
         </div>
 
+        {/* Content Container - Better spacing and positioning */}
         <div className="relative z-20 min-h-screen flex items-center">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full py-20">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="mb-6">
-                  <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
-                    <div className="flex items-center gap-1">{Array(5).fill().map((_, i) => <svg key={i} className="w-4 h-4 text-[#d8a43f] fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.07 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>)}</div>
-                    <span className="text-white text-sm font-medium">4.9</span>
-                    <span className="text-white/50 text-xs">• 2,500+ Reviews</span>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 md:py-20 lg:py-24">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+              {/* Left Content - Better typography classes */}
+              <div className="text-center lg:text-left">
+                {/* Rating Badge - Improved */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.6 }}
+                  className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mb-6"
+                >
+                  <div className="flex items-center gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <svg
+                        key={i}
+                        className="w-4 h-4 text-yellow-400 fill-current"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.07 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z" />
+                      </svg>
+                    ))}
                   </div>
-                </div>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.2] tracking-tight">
-                  <span className="block text-white">Kohat</span>
-                  <span className="block bg-gradient-to-r from-[#d8a43f] via-[#cc2b2b] to-[#d8a43f] bg-clip-text text-transparent mt-1">Finest Grill</span>
-                </h1>
-                <p className="text-gray-300 text-base md:text-lg mb-8 max-w-lg leading-relaxed">Premium steaks, authentic karahi, and the perfect blend of American BBQ with Pakistani tradition.</p>
-                <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                  <Link href="/menu"><button className="px-8 py-3.5 bg-[#d8a43f] text-black font-bold rounded-full shadow-xl">View Full Menu</button></Link>
-                  <Link href="/custom-order"><button className="px-8 py-3.5 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-black">Reserve a Table</button></Link>
-                </div>
-                <div className="flex flex-wrap gap-6">
-                  <div className="flex items-center gap-2"><div className="w-10 h-10 rounded-full bg-[#d8a43f]/20 flex items-center justify-center"><svg className="w-5 h-5 text-[#d8a43f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div><div><p className="text-white font-semibold text-sm">100% Halal</p><p className="text-gray-400 text-xs">Certified Premium Meat</p></div></div>
-                  <div className="flex items-center gap-2"><div className="w-10 h-10 rounded-full bg-[#d8a43f]/20 flex items-center justify-center"><svg className="w-5 h-5 text-[#d8a43f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div><div><p className="text-white font-semibold text-sm">Fresh Daily</p><p className="text-gray-400 text-xs">Made to Order</p></div></div>
-                  <div className="flex items-center gap-2"><div className="w-10 h-10 rounded-full bg-[#d8a43f]/20 flex items-center justify-center"><svg className="w-5 h-5 text-[#d8a43f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg></div><div><p className="text-white font-semibold text-sm">Kohat Best</p><p className="text-gray-400 text-xs">Since 2010</p></div></div>
-                </div>
+                  <span className="text-white text-sm font-semibold">4.9</span>
+                  <span className="text-gray-300 text-xs">
+                    (2,500+ reviews)
+                  </span>
+                </motion.div>
+
+                {/* Headline - Better responsive font sizes */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
+                  className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[1.1] tracking-tighter mb-6"
+                >
+                  <span className="block text-white">Kohat's</span>
+                  <span className="block bg-gradient-to-r from-amber-400 via-red-500 to-amber-400 bg-clip-text text-transparent mt-2">
+                    Finest Grill
+                  </span>
+                </motion.h1>
+
+                {/* Description - Better readability */}
+                <motion.p
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.8 }}
+                  className="text-gray-300 text-base sm:text-lg md:text-xl mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
+                >
+                  Premium steaks, authentic karahi, and the perfect blend of
+                  American BBQ with Pakistani tradition.
+                </motion.p>
+
+                {/* CTA Buttons - Better styling */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.8 }}
+                  className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10"
+                >
+                  <Link href="/menu">
+                    <button className="group relative px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-black font-bold rounded-full overflow-hidden shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                      <span className="relative z-10 flex items-center gap-2">
+                        View Full Menu
+                        <svg
+                          className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
+                        </svg>
+                      </span>
+                    </button>
+                  </Link>
+                  <Link href="/custom-order">
+                    <button className="px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-black transition-all duration-300 hover:scale-105">
+                      Reserve a Table
+                    </button>
+                  </Link>
+                </motion.div>
+
+                {/* Trust Indicators - Better grid */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1, duration: 0.8 }}
+                  className="grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0"
+                >
+                  <div className="flex flex-col items-center lg:items-start gap-2">
+                    <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+                      <svg
+                        className="w-5 h-5 text-amber-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                    <p className="text-white font-semibold text-sm">
+                      100% Halal
+                    </p>
+                    <p className="text-gray-400 text-xs">Certified</p>
+                  </div>
+                  <div className="flex flex-col items-center lg:items-start gap-2">
+                    <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+                      <svg
+                        className="w-5 h-5 text-amber-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                    <p className="text-white font-semibold text-sm">
+                      Fresh Daily
+                    </p>
+                    <p className="text-gray-400 text-xs">Made to Order</p>
+                  </div>
+                  <div className="flex flex-col items-center lg:items-start gap-2">
+                    <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+                      <svg
+                        className="w-5 h-5 text-amber-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        />
+                      </svg>
+                    </div>
+                    <p className="text-white font-semibold text-sm">
+                      Since 2010
+                    </p>
+                    <p className="text-gray-400 text-xs">14+ Years</p>
+                  </div>
+                </motion.div>
               </div>
-              <div className="hidden lg:block relative">
-                <div className="relative w-full">
-                  <div className="relative bg-black/30 backdrop-blur-sm rounded-3xl p-4 border border-white/20">
-                    <div className="absolute inset-0 rounded-3xl border-2 border-[#d8a43f]/30 pointer-events-none"></div>
+
+              {/* Right Side - Image Collage with better classes */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
+                className="hidden lg:block relative"
+              >
+                <div className="relative w-full max-w-lg mx-auto">
+                  <div className="relative bg-black/40 backdrop-blur-sm rounded-3xl p-4 border border-white/20 shadow-2xl">
+                    {/* Decorative borders */}
+                    <div className="absolute inset-0 rounded-3xl border border-amber-500/30 pointer-events-none" />
+                    <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-amber-500/20 to-red-500/20 blur-xl -z-10" />
+
+                    {/* Image Grid - Better sizing and spacing */}
                     <div className="grid grid-cols-3 grid-rows-3 gap-3 h-[500px] w-full">
-                      <div className="col-span-2 row-span-2 rounded-2xl overflow-hidden relative">
-                        <IKImage src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-6.jpg" alt="BBQ" width={600} height={400} className="w-full h-full object-cover" priority />
+                      {/* Large image */}
+                      <div className="col-span-2 row-span-2 rounded-2xl overflow-hidden relative group">
+                        <img
+                          src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-6.jpg"
+                          alt="BBQ"
+                          className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition" />
+                        <div className="absolute bottom-3 left-3 text-white text-xs font-bold bg-black/50 px-2 py-1 rounded-full backdrop-blur-sm">
+                          🔥 Signature BBQ
+                        </div>
                       </div>
-                      <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden">
-                        <IKImage src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-9.jpg" alt="Burger" width={200} height={200} className="w-full h-full object-cover" />
+
+                      {/* Small images */}
+                      <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden relative group">
+                        <img
+                          src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-9.jpg"
+                          alt="Burger"
+                          className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                        />
                       </div>
-                      <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden">
-                        <IKImage src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-4.jpg" alt="Karahi" width={200} height={200} className="w-full h-full object-cover" />
+                      <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden relative group">
+                        <img
+                          src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-4.jpg"
+                          alt="Karahi"
+                          className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                        />
                       </div>
-                      <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden">
-                        <IKImage src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-4.jpg" alt="Biryani" width={200} height={200} className="w-full h-full object-cover" />
+                      <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden relative group">
+                        <img
+                          src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-4.jpg"
+                          alt="Biryani"
+                          className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                        />
                       </div>
-                      <div className="col-span-2 row-span-1 rounded-2xl overflow-hidden">
-                        <IKImage src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-8.jpg" alt="Pizza" width={400} height={200} className="w-full h-full object-cover" />
+
+                      {/* Wide image */}
+                      <div className="col-span-2 row-span-1 rounded-2xl overflow-hidden relative group">
+                        <img
+                          src="https://ik.imagekit.io/o7uoqfzynm/IMGs/hero-8.jpg"
+                          alt="Pizza"
+                          className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                        />
+                        <div className="absolute bottom-3 right-3 text-white text-xs font-bold bg-black/50 px-2 py-1 rounded-full backdrop-blur-sm">
+                          🍕 Chef's Special
+                        </div>
+                      </div>
+
+                      {/* Center decorative element */}
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-amber-500/20 rounded-full blur-xl" />
+                    </div>
+
+                    {/* Floating badges */}
+                    <div className="absolute -top-4 -right-4 bg-gradient-to-r from-amber-500 to-red-500 text-black px-4 py-2 rounded-full shadow-2xl">
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">⭐</span>
+                        <span className="font-bold text-sm">
+                          20+ Signature Dishes
+                        </span>
                       </div>
                     </div>
-                    <div className="absolute -top-4 -right-4 bg-gradient-to-r from-[#d8a43f] to-[#cc2b2b] text-black px-4 py-2 rounded-full shadow-2xl"><div className="flex items-center gap-2"><span className="text-lg">⭐</span><span className="font-bold text-sm">20+ Signature Dishes</span></div></div>
-                    <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20"><p className="text-xs text-white">✨ Authentic Pakistani Flavors • Texas Style Grilling ✨</p></div>
+                    <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 whitespace-nowrap">
+                      <p className="text-xs text-white">
+                        ✨ Authentic Pakistani Flavors • Texas Style Grilling ✨
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
+
+        {/* Slide Navigation Dots - Better styling */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-          {heroImages.map((_, idx) => (<button key={idx} onClick={() => setCurrentSlide(idx)} className={`transition-all duration-500 rounded-full ${currentSlide === idx ? "w-8 h-1 bg-[#d8a43f]" : "w-2 h-1 bg-white/40 hover:bg-white/60"}`} />))}
+          {heroImages.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentSlide(idx)}
+              className={`transition-all duration-500 rounded-full ${
+                currentSlide === idx
+                  ? "w-10 h-1.5 bg-amber-500"
+                  : "w-2 h-1.5 bg-white/40 hover:bg-white/60"
+              }`}
+            />
+          ))}
         </div>
+
+        {/* Scroll Indicator - Better design */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.3 }}
+          className="absolute bottom-8 right-8 z-20 hidden lg:flex flex-col items-center gap-2"
+        >
+          <span className="text-[8px] text-white/40 tracking-widest uppercase">
+            Scroll
+          </span>
+          <div className="w-px h-12 bg-gradient-to-b from-amber-500 to-transparent" />
+          <svg
+            className="w-4 h-4 text-white/40 animate-bounce"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
+          </svg>
+        </motion.div>
       </section>
 
       {/* Categories Section */}
       <section className="py-20 bg-black px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <span className="text-[#d8a43f] text-sm font-medium tracking-wider uppercase">Discover</span>
-            <h2 className="text-3xl md:text-4xl font-black mt-2">Our Signature Categories</h2>
+            <span className="text-[#d8a43f] text-sm font-medium tracking-wider uppercase">
+              Discover
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black mt-2">
+              Our Signature Categories
+            </h2>
             <div className="w-16 h-0.5 bg-[#d8a43f] mx-auto mt-4"></div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {loading ? (
-              Array(5).fill().map((_, i) => <CategorySkeleton key={i} />)
-            ) : (
-              apiCats.slice(0, 10).map((category) => (
-                <div key={category._id} onClick={() => handleCategoryClick(category.slug)} className="group cursor-pointer">
-                  <div className="relative overflow-hidden rounded-xl aspect-square bg-gray-900 border border-gray-800">
-                    <IKImage src={category.image?.url || category.image} alt={category.name} width={300} height={300} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-3 text-center">
-                      <h3 className="text-white font-bold text-sm">{category.name}</h3>
-                      <p className="text-[#d8a43f] text-[10px] mt-0.5 opacity-0 group-hover:opacity-100 transition">Explore →</p>
+            {loading
+              ? Array(5)
+                  .fill()
+                  .map((_, i) => <CategorySkeleton key={i} />)
+              : apiCats.slice(0, 10).map((category) => (
+                  <div
+                    key={category._id}
+                    onClick={() => handleCategoryClick(category.slug)}
+                    className="group cursor-pointer"
+                  >
+                    <div className="relative overflow-hidden rounded-xl aspect-square bg-gray-900 border border-gray-800">
+                      <IKImage
+                        src={category.image?.url || category.image}
+                        alt={category.name}
+                        width={300}
+                        height={300}
+                        className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-3 text-center">
+                        <h3 className="text-white font-bold text-sm">
+                          {category.name}
+                        </h3>
+                        <p className="text-[#d8a43f] text-[10px] mt-0.5 opacity-0 group-hover:opacity-100 transition">
+                          Explore →
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
-            )}
+                ))}
           </div>
         </div>
       </section>
@@ -221,38 +495,83 @@ export default function HomePage() {
       <section className="py-20 bg-gradient-to-b from-black to-gray-900 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <span className="text-[#d8a43f] text-sm font-medium tracking-wider uppercase">Must Try</span>
-            <h2 className="text-3xl md:text-4xl font-black mt-2">Signature Dishes</h2>
+            <span className="text-[#d8a43f] text-sm font-medium tracking-wider uppercase">
+              Must Try
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black mt-2">
+              Signature Dishes
+            </h2>
             <div className="w-16 h-0.5 bg-[#d8a43f] mx-auto mt-4"></div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {loading ? (
-              Array(8).fill().map((_, i) => <DishSkeleton key={i} />)
-            ) : (
-              featuredItems.map((item) => (
-                <div key={item._id} className="group bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-[#d8a43f]/50 transition-all duration-300">
-                  <Link href={`/product/${item._id}`}>
-                    <div className="relative h-44 overflow-hidden">
-                      <IKImage src={item.image?.url || item.image} alt={item.name} width={400} height={300} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" priority={item.isPopular} />
-                      {(item.isPopular || item.price > 2000) && <span className="absolute top-2 right-2 bg-[#d8a43f] text-black text-[10px] font-bold px-2 py-1 rounded-full">Chefs Pick</span>}
-                    </div>
-                  </Link>
-                  <div className="p-3">
-                    <Link href={`/product/${item._id}`}><h3 className="font-bold text-sm mb-1 line-clamp-1 hover:text-[#d8a43f] transition">{item.name}</h3></Link>
-                    <p className="text-gray-500 text-xs mb-2 line-clamp-2">{item.description}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-[#d8a43f] font-bold">Rs. {item.price}</span>
-                      <button onClick={() => handleAddToCart(item)} className="w-8 h-8 bg-[#d8a43f]/20 rounded-full flex items-center justify-center hover:bg-[#d8a43f] transition-colors">
-                        <svg className="w-4 h-4 text-[#d8a43f] hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
-                      </button>
+            {loading
+              ? Array(8)
+                  .fill()
+                  .map((_, i) => <DishSkeleton key={i} />)
+              : featuredItems.map((item) => (
+                  <div
+                    key={item._id}
+                    className="group bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-[#d8a43f]/50 transition-all duration-300"
+                  >
+                    <Link href={`/product/${item._id}`}>
+                      <div className="relative h-44 overflow-hidden">
+                        <IKImage
+                          src={item.image?.url || item.image}
+                          alt={item.name}
+                          width={400}
+                          height={300}
+                          className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                          priority={item.isPopular}
+                        />
+                        {(item.isPopular || item.price > 2000) && (
+                          <span className="absolute top-2 right-2 bg-[#d8a43f] text-black text-[10px] font-bold px-2 py-1 rounded-full">
+                            Chefs Pick
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+                    <div className="p-3">
+                      <Link href={`/product/${item._id}`}>
+                        <h3 className="font-bold text-sm mb-1 line-clamp-1 hover:text-[#d8a43f] transition">
+                          {item.name}
+                        </h3>
+                      </Link>
+                      <p className="text-gray-500 text-xs mb-2 line-clamp-2">
+                        {item.description}
+                      </p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-[#d8a43f] font-bold">
+                          Rs. {item.price}
+                        </span>
+                        <button
+                          onClick={() => handleAddToCart(item)}
+                          className="w-8 h-8 bg-[#d8a43f]/20 rounded-full flex items-center justify-center hover:bg-[#d8a43f] transition-colors"
+                        >
+                          <svg
+                            className="w-4 h-4 text-[#d8a43f] hover:text-black"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M12 4v16m8-8H4"
+                            ></path>
+                          </svg>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
-            )}
+                ))}
           </div>
           <div className="text-center mt-10">
-            <Link href="/menu"><button className="px-8 py-3 border-2 border-[#d8a43f] text-[#d8a43f] font-bold rounded-full hover:bg-[#d8a43f] hover:text-black transition">View Full Menu</button></Link>
+            <Link href="/menu">
+              <button className="px-8 py-3 border-2 border-[#d8a43f] text-[#d8a43f] font-bold rounded-full hover:bg-[#d8a43f] hover:text-black transition">
+                View Full Menu
+              </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -262,17 +581,63 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="text-[#d8a43f] text-sm font-medium tracking-wider uppercase">Our Story</span>
-              <h2 className="text-3xl md:text-4xl font-black mt-2 mb-4">Where Tradition Meets Flame</h2>
+              <span className="text-[#d8a43f] text-sm font-medium tracking-wider uppercase">
+                Our Story
+              </span>
+              <h2 className="text-3xl md:text-4xl font-black mt-2 mb-4">
+                Where Tradition Meets Flame
+              </h2>
               <div className="w-12 h-0.5 bg-[#d8a43f] mb-6"></div>
-              <p className="text-gray-400 leading-relaxed mb-6">Experience the perfect fusion of American BBQ and Pakistani tradition in the heart of Kohat. Every dish tells a story of passion, tradition, and culinary excellence.</p>
+              <p className="text-gray-400 leading-relaxed mb-6">
+                Experience the perfect fusion of American BBQ and Pakistani
+                tradition in the heart of Kohat. Every dish tells a story of
+                passion, tradition, and culinary excellence.
+              </p>
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="bg-gray-900 rounded-xl p-4 text-center border border-gray-800"><div className="text-3xl font-black text-[#d8a43f]">14+</div><div className="text-xs text-gray-500 mt-1">Years of Excellence</div></div>
-                <div className="bg-gray-900 rounded-xl p-4 text-center border border-gray-800"><div className="text-3xl font-black text-[#d8a43f]">50K+</div><div className="text-xs text-gray-500 mt-1">Happy Customers</div></div>
+                <div className="bg-gray-900 rounded-xl p-4 text-center border border-gray-800">
+                  <div className="text-3xl font-black text-[#d8a43f]">14+</div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    Years of Excellence
+                  </div>
+                </div>
+                <div className="bg-gray-900 rounded-xl p-4 text-center border border-gray-800">
+                  <div className="text-3xl font-black text-[#d8a43f]">50K+</div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    Happy Customers
+                  </div>
+                </div>
               </div>
-              <Link href="/about"><button className="text-[#d8a43f] font-semibold flex items-center gap-2 hover:gap-3 transition-all">Learn More About Us<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></button></Link>
+              <Link href="/about">
+                <button className="text-[#d8a43f] font-semibold flex items-center gap-2 hover:gap-3 transition-all">
+                  Learn More About Us
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    ></path>
+                  </svg>
+                </button>
+              </Link>
             </div>
-            <div className="relative"><div className="relative rounded-xl overflow-hidden shadow-2xl"><IKImage src="https://ik.imagekit.io/o7uoqfzynm/IMGs/logo.png" alt="Texas Grill" width={800} height={600} className="w-full h-auto object-cover" priority /></div></div>
+            <div className="relative">
+              <div className="relative rounded-xl overflow-hidden shadow-2xl">
+                <IKImage
+                  src="https://ik.imagekit.io/o7uoqfzynm/IMGs/logo.png"
+                  alt="Texas Grill"
+                  width={800}
+                  height={600}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -282,9 +647,18 @@ export default function HomePage() {
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#cc2b2b] to-[#d8a43f] p-10 text-center">
             <div className="absolute inset-0 bg-black/20"></div>
             <div className="relative z-10">
-              <h3 className="text-2xl md:text-3xl font-black mb-3">Ready for an Experience?</h3>
-              <p className="text-white/90 mb-6 max-w-2xl mx-auto">Book your table now and discover why we are Kohats most loved grill restaurant.</p>
-              <Link href="/custom-order"><button className="px-8 py-3 bg-white text-[#cc2b2b] font-bold rounded-full hover:shadow-xl transition">Reserve Your Table</button></Link>
+              <h3 className="text-2xl md:text-3xl font-black mb-3">
+                Ready for an Experience?
+              </h3>
+              <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+                Book your table now and discover why we are Kohats most loved
+                grill restaurant.
+              </p>
+              <Link href="/custom-order">
+                <button className="px-8 py-3 bg-white text-[#cc2b2b] font-bold rounded-full hover:shadow-xl transition">
+                  Reserve Your Table
+                </button>
+              </Link>
             </div>
           </div>
         </div>
