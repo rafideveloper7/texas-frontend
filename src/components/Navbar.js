@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useCart } from './CartProvider';
 import { useState } from 'react';
 import SidebarMenu from './SidebarMenu';
+import { IKImage } from "@imagekit/next";
 
 export function Navbar() {
   const { numItems } = useCart();
