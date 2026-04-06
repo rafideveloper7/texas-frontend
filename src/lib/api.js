@@ -1,6 +1,8 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 async function fetchFromApi(path, fallback, revalidate = 300) {
+  // Keep server-rendered pages resilient in local/dev environments where the API
+  // can be unavailable. We prefer partial rendering over throwing the whole page.
   if (!API_BASE_URL) {
     return fallback;
   }
@@ -23,6 +25,7 @@ async function fetchFromApi(path, fallback, revalidate = 300) {
 }
 
 export async function getMenuItems() {
+  // Menu data powers multiple routes, so we reuse the same cached fetch shape.
   return fetchFromApi("/menu", []);
 }
 

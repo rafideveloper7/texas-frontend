@@ -1,4 +1,5 @@
 "use client";
+// Custom order flow remains client-side because it is form-heavy and highly interactive.
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";

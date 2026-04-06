@@ -1,4 +1,5 @@
 "use client";
+// About page currently derives its storytelling content on the client side.
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";

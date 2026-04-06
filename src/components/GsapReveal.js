@@ -15,11 +15,14 @@ export default function GsapReveal({
     let ctx;
 
     async function setupAnimation() {
+      // Respect reduced-motion and avoid loading GSAP at all when motion should
+      // be minimized.
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduceMotion || !elementRef.current) {
         return;
       }
 
+      // Lazy-loading keeps GSAP out of the critical path for the initial page load.
       const gsapModule = await import("gsap");
       const scrollTriggerModule = await import("gsap/ScrollTrigger");
       const gsap = gsapModule.gsap || gsapModule.default || gsapModule;
@@ -31,6 +34,8 @@ export default function GsapReveal({
       gsap.registerPlugin(ScrollTrigger);
 
       ctx = gsap.context(() => {
+        // Most sections reveal once; scrub is available for the few places where
+        // scroll-linked motion feels useful.
         gsap.fromTo(
           elementRef.current,
           { autoAlpha: 0, y },

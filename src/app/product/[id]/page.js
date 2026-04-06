@@ -1,3 +1,4 @@
+// Server wrapper for the product detail route so product content is available on first paint.
 import { notFound } from "next/navigation";
 import ProductDetailClient from "@/components/pages/ProductDetailClient";
 import { getMenuItem, getMenuItems } from "@/lib/api";

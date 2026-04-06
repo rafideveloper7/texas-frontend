@@ -1,4 +1,5 @@
 'use client';
+// Checkout remains client-rendered because it depends on local cart state and form UX.
 import { useState, useEffect, useRef } from 'react';
 import { useCart } from '@/components/CartProvider';
 import Link from 'next/link';

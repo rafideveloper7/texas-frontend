@@ -1,4 +1,5 @@
 'use client';
+// Global cart store persisted to localStorage for the storefront experience.
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();

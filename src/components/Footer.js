@@ -1,4 +1,5 @@
 'use client';
+// Footer keeps lightweight newsletter UX and adapts to both light and dark themes.
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -38,7 +39,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-b from-[#0a0a0a] to-[#050505] border-t border-gray-800 pt-12 pb-6 font-sans">
+    <footer className="site-footer bg-gradient-to-b from-[#0a0a0a] to-[#050505] border-t border-gray-800 pt-12 pb-6 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>

@@ -1,4 +1,5 @@
 'use client';
+// Contact page includes a client-side form flow and motion-driven reveals.
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useAnimation } from 'framer-motion';
 import Link from 'next/link';

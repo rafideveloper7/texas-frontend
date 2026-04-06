@@ -1,3 +1,4 @@
+// Server entry for the homepage. Interactive behavior lives in HomePageClient.
 import HomePageClient from "@/components/pages/HomePageClient";
 import { getCategories, getMenuItems } from "@/lib/api";
 

@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+// Central image wrapper so performance tweaks can be applied in one place.
 function getCloudinaryUrl(src) {
   if (!src?.includes("res.cloudinary.com")) {
     return src;

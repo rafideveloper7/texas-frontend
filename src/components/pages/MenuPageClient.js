@@ -1,5 +1,6 @@
 "use client";
 
+// Client-side menu browsing powered by server-provided menu/category data.
 import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";

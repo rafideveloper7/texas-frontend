@@ -1,5 +1,6 @@
 "use client";
 
+// Client-side product listing with filtering, sorting, and add-to-cart actions.
 import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";

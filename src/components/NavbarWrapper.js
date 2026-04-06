@@ -1,4 +1,5 @@
 'use client';
+// Wraps the public site chrome so admin routes can opt out of navbar/footer rendering.
 import { usePathname } from 'next/navigation';
 import { Navbar } from './Navbar';
 import Footer from './Footer';

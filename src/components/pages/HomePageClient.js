@@ -1,5 +1,6 @@
 "use client";
 
+// Homepage interactions stay on the client while primary data is rendered on the server.
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -123,9 +124,9 @@ export default function HomePageClient({ initialItems, initialCategories }) {
                   priority
                   sizes="100vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+                <div className="hero-overlay hero-overlay-x absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30" />
+                <div className="hero-overlay hero-overlay-y absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="hero-overlay hero-overlay-soft absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
               </motion.div>
             )}
           </AnimatePresence>
@@ -147,9 +148,13 @@ export default function HomePageClient({ initialItems, initialCategories }) {
                   <span className="text-gray-300 text-xs">(2,500+ reviews)</span>
                 </motion.div>
 
-                <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8 }} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[1.1] tracking-tighter mb-6">
-                  <span className="block text-white">Kohat's</span>
-                  <span className="block bg-gradient-to-r from-amber-400 via-red-500 to-amber-400 bg-clip-text text-transparent mt-2">Finest Grill</span>
+                <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8 }} className="mb-6 text-[2.85rem] sm:text-[4rem] md:text-[5.25rem] lg:text-[6.25rem] xl:text-[7.5rem] 2xl:text-[8.25rem] font-black leading-[0.95] tracking-[-0.05em]">
+                  <span className="block text-white/95">Kohat&apos;s</span>
+                  <span className="mt-2 block">
+                    <span className="inline-block bg-gradient-to-r from-[#ffd47a] via-[#e85b3a] to-[#ffbf5f] bg-clip-text text-transparent drop-shadow-[0_6px_24px_rgba(0,0,0,0.28)]">
+                      Finest Grill
+                    </span>
+                  </span>
                 </motion.h1>
 
                 <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.8 }} className="text-gray-300 text-base sm:text-lg md:text-xl mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
@@ -227,11 +232,11 @@ export default function HomePageClient({ initialItems, initialCategories }) {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {apiCats.slice(0, 10).map((category) => (
               <div key={category._id} onClick={() => handleCategoryClick(category.slug)} className="group cursor-pointer">
-                <div className="relative overflow-hidden rounded-xl aspect-square bg-gray-900 border border-gray-800">
+                <div className="category-card relative overflow-hidden rounded-xl aspect-square bg-gray-900 border border-gray-800">
                   <FastImage src={category.image?.url || category.image} alt={category.name} fill sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 20vw" className="object-cover group-hover:scale-110 transition duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+                  <div className="category-overlay absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-3 text-center">
-                    <h3 className="text-white font-bold text-sm">{category.name}</h3>
+                    <h3 className="category-label text-white font-bold text-sm inline-block px-3 py-2 rounded-2xl">{category.name}</h3>
                     <p className="text-[#d8a43f] text-[10px] mt-0.5 opacity-0 group-hover:opacity-100 transition">Explore →</p>
                   </div>
                 </div>

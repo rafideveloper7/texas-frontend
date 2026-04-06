@@ -1,3 +1,4 @@
+// Server wrapper for the products page so the first render includes data.
 import ProductsPageClient from "@/components/pages/ProductsPageClient";
 import { getCategories, getMenuItems } from "@/lib/api";
 

@@ -1,3 +1,4 @@
+// Shared loading placeholders used while client-side UI waits on data or hydration.
 export function CategorySkeleton() {
   return (
     <div className="animate-pulse">

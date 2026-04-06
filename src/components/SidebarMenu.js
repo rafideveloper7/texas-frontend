@@ -1,7 +1,9 @@
 'use client';
+// Mobile navigation drawer with quick links, theme access, and checkout shortcut.
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCart } from './CartProvider';
+import ThemeToggle from './ThemeToggle';
 
 export default function SidebarMenu({ isOpen, setIsOpen }) {
   const pathname = usePathname();
@@ -37,6 +39,12 @@ export default function SidebarMenu({ isOpen, setIsOpen }) {
 
         <div className="flex-1 overflow-y-auto py-6 px-4">
           <div className="space-y-2 mb-8 border-b border-gray-800 pb-8">
+            <div className="px-4 pb-4">
+              <div className="flex items-center justify-between rounded-xl border border-gray-800 bg-gray-900 px-4 py-3">
+                <span className="text-sm font-bold uppercase tracking-wider text-gray-300">Theme</span>
+                <ThemeToggle />
+              </div>
+            </div>
             <Link href="/" onClick={() => setIsOpen(false)} className={`flex items-center min-h-[44px] px-4 rounded-xl font-bold uppercase tracking-wider text-sm transition ${pathname === '/' ? 'bg-[#d8a43f] text-black' : 'text-gray-300 hover:bg-gray-900'}`}>
               <svg className="w-5 h-5 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
               Home

@@ -1,5 +1,6 @@
 "use client";
 
+// Interactive product detail view. The product record itself is loaded on the server.
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
