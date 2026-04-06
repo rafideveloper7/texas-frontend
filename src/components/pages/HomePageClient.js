@@ -90,7 +90,7 @@ export default function HomePageClient({ initialItems, initialCategories }) {
     .slice(0, 8);
 
   return (
-    <div className="bg-black font-sans text-white overflow-x-hidden">
+    <div className="light-shell bg-black font-sans text-white overflow-x-hidden">
       <AnimatePresence>
         {showToast && (
           <motion.div
@@ -136,7 +136,7 @@ export default function HomePageClient({ initialItems, initialCategories }) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 md:py-20 lg:py-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
               <div className="text-center lg:text-left">
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }} className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mb-6">
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }} className="light-hero-badge inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mb-6">
                   <div className="flex items-center gap-0.5">
                     {[...Array(5)].map((_, i) => (
                       <svg key={i} className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24">
@@ -173,7 +173,7 @@ export default function HomePageClient({ initialItems, initialCategories }) {
                     </button>
                   </Link>
                   <Link href="/custom-order">
-                    <button className="pressable px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-black transition-all duration-300 hover:scale-105">
+                    <button className="pressable light-outline-button px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-black transition-all duration-300 hover:scale-105">
                       Reserve a Table
                     </button>
                   </Link>
@@ -188,7 +188,7 @@ export default function HomePageClient({ initialItems, initialCategories }) {
 
               <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, duration: 0.8, type: "spring" }} className="hidden lg:block relative">
                 <div className="relative w-full max-w-lg mx-auto">
-                  <div className="relative bg-black/40 backdrop-blur-sm rounded-3xl p-4 border border-white/20 shadow-2xl">
+                  <div className="light-hero-panel relative bg-black/40 backdrop-blur-sm rounded-3xl p-4 border border-white/20 shadow-2xl">
                     <div className="absolute inset-0 rounded-3xl border border-amber-500/30 pointer-events-none" />
                     <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-amber-500/20 to-red-500/20 blur-xl -z-10" />
 
@@ -222,7 +222,7 @@ export default function HomePageClient({ initialItems, initialCategories }) {
       </section>
 
       <GsapReveal y={60}>
-        <section className="py-20 bg-black px-4">
+        <section className="light-section-soft py-20 bg-black px-4">
           <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-[#d8a43f] text-sm font-medium tracking-wider uppercase">Discover</span>
@@ -248,7 +248,7 @@ export default function HomePageClient({ initialItems, initialCategories }) {
       </GsapReveal>
 
       <GsapReveal y={70}>
-        <section className="py-20 bg-gradient-to-b from-black to-gray-900 px-4">
+        <section className="light-section-warm py-20 bg-gradient-to-b from-black to-gray-900 px-4">
           <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-[#d8a43f] text-sm font-medium tracking-wider uppercase">Must Try</span>
@@ -257,7 +257,7 @@ export default function HomePageClient({ initialItems, initialCategories }) {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {featuredItems.map((item) => (
-              <div key={item._id} className="group bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-[#d8a43f]/50 transition-all duration-300">
+              <div key={item._id} className="light-card group bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-[#d8a43f]/50 transition-all duration-300">
                 <Link href={`/product/${item._id}`}>
                   <div className="relative h-44 overflow-hidden">
                     <FastImage src={item.image?.url || item.image} alt={item.name} fill sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw" className="object-cover group-hover:scale-110 transition duration-500" />
@@ -278,14 +278,14 @@ export default function HomePageClient({ initialItems, initialCategories }) {
             ))}
           </div>
           <div className="text-center mt-10">
-            <Link href="/menu"><button className="pressable px-8 py-3 border-2 border-[#d8a43f] text-[#d8a43f] font-bold rounded-full hover:bg-[#d8a43f] hover:text-black transition">View Full Menu</button></Link>
+            <Link href="/menu"><button className="pressable light-outline-button px-8 py-3 border-2 border-[#d8a43f] text-[#d8a43f] font-bold rounded-full hover:bg-[#d8a43f] hover:text-black transition">View Full Menu</button></Link>
           </div>
           </div>
         </section>
       </GsapReveal>
 
       <GsapReveal y={65}>
-        <section className="py-20 bg-black px-4">
+        <section className="light-section-soft py-20 bg-black px-4">
           <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -294,8 +294,8 @@ export default function HomePageClient({ initialItems, initialCategories }) {
               <div className="w-12 h-0.5 bg-[#d8a43f] mb-6"></div>
               <p className="text-gray-400 leading-relaxed mb-6">Experience the perfect fusion of American BBQ and Pakistani tradition in the heart of Kohat. Every dish tells a story of passion, tradition, and culinary excellence.</p>
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="bg-gray-900 rounded-xl p-4 text-center border border-gray-800"><div className="text-3xl font-black text-[#d8a43f]">14+</div><div className="text-xs text-gray-500 mt-1">Years of Excellence</div></div>
-                <div className="bg-gray-900 rounded-xl p-4 text-center border border-gray-800"><div className="text-3xl font-black text-[#d8a43f]">50K+</div><div className="text-xs text-gray-500 mt-1">Happy Customers</div></div>
+                <div className="light-card rounded-xl p-4 text-center border border-gray-800"><div className="text-3xl font-black text-[#d8a43f]">14+</div><div className="text-xs text-gray-500 mt-1">Years of Excellence</div></div>
+                <div className="light-card rounded-xl p-4 text-center border border-gray-800"><div className="text-3xl font-black text-[#d8a43f]">50K+</div><div className="text-xs text-gray-500 mt-1">Happy Customers</div></div>
               </div>
               <Link href="/about"><button className="pressable text-[#d8a43f] font-semibold flex items-center gap-2 hover:gap-3 transition-all">Learn More About Us<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></button></Link>
             </div>
@@ -312,7 +312,7 @@ export default function HomePageClient({ initialItems, initialCategories }) {
       <GsapReveal y={50}>
         <section className="py-16 px-4">
           <div className="max-w-7xl mx-auto">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#cc2b2b] to-[#d8a43f] p-10 text-center">
+          <div className="light-cta relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#cc2b2b] to-[#d8a43f] p-10 text-center">
             <div className="absolute inset-0 bg-black/20"></div>
             <div className="relative z-10">
               <h3 className="text-2xl md:text-3xl font-black mb-3">Ready for an Experience?</h3>
